@@ -1,0 +1,12 @@
+service:
+  name: Producer
+
+kafka:
+  bootstrapAddress: localhost:9092
+  topic:
+    message:
+      topicName: messageTopic
+      partition: 3
+    log:
+      topicName: logTopic
+      partition: 2
