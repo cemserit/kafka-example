@@ -1,0 +1,31 @@
+dependencies {
+	implementation project(':core')
+
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.kafka:spring-kafka'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.9.3'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.kafka:spring-kafka-test'
+}
+
+ext {
+	mainClassName = 'com.cemserit.kafka.consumer.KafkaConsumerApplication'
+}
+
+jar {
+	group = project.group
+	version = project.version
+	enabled = true
+	manifest {
+		attributes 'Main-Class': "${mainClassName}"
+		attributes "Class-Path": (configurations.runtime.files + jar.outputs.files)*.name.join(" ")
+	}
+}
+
+bootJar {
+	mainClassName = "${mainClassName}"
+	manifest {
+		attributes 'Start-Class': "${mainClassName}"
+	}
+}
